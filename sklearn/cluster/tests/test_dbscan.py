@@ -180,7 +180,7 @@ def test_dbscan_metric_params():
             min_samples=min_samples,
             algorithm="ball_tree",
         ).fit(X)
-    assert not warns
+    assert not warns, warns[0].message
     core_sample_1, labels_1 = db.core_sample_indices_, db.labels_
 
     # Test that sample labels are the same as passing Minkowski 'p' directly
@@ -267,22 +267,6 @@ def test_input_validation():
     # DBSCAN.fit should accept a list of lists.
     X = [[1.0, 2.0], [3.0, 4.0]]
     DBSCAN().fit(X)  # must not raise exception
-
-
-@pytest.mark.parametrize(
-    "args",
-    [
-        {"eps": -1.0},
-        {"algorithm": "blah"},
-        {"metric": "blah"},
-        {"leaf_size": -1},
-        {"p": -1},
-    ],
-)
-def test_dbscan_badargs(args):
-    # Test bad argument values: these should all raise ValueErrors
-    with pytest.raises(ValueError):
-        dbscan(X, **args)
 
 
 def test_pickle():

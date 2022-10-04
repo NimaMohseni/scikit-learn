@@ -18,13 +18,9 @@ dtypes = [('64', 'double'),
 
 }}
 
-cimport numpy as np
+# WARNING: Do not edit this .pyx file directly, it is generated from its .pyx.tp
 
 {{for name_suffix, c_type in dtypes}}
-
-cdef extern from "math.h":
-    cdef extern {{c_type}} sqrt({{c_type}} x)
-
 
 cdef class WeightVector{{name_suffix}}(object):
     cdef readonly {{c_type}}[::1] w

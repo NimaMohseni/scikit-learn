@@ -18,9 +18,7 @@ dtypes = [('64', 'double', 1e-9),
 
 }}
 
-# cython: cdivision=True
-# cython: boundscheck=False
-# cython: wraparound=False
+# cython: binding=False
 #
 # Author: Peter Prettenhofer <peter.prettenhofer@gmail.com>
 #         Lars Buitinck
@@ -28,16 +26,13 @@ dtypes = [('64', 'double', 1e-9),
 #
 # License: BSD 3 clause
 
+# WARNING: Do not edit this .pyx file directly, it is generated from its .pyx.tp
+
 cimport cython
 from libc.limits cimport INT_MAX
 from libc.math cimport sqrt
-import numpy as np
-cimport numpy as np
 
 from ._cython_blas cimport _dot, _scal, _axpy
-
-
-np.import_array()
 
 {{for name_suffix, c_type, reset_wscale_threshold in dtypes}}
 
